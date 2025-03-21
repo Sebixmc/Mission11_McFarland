@@ -77,3 +77,4 @@
 /Users/sebimcfarland/Desktop/Mission11_McFarland__RealVersion/backend/BookProject.APIE/obj/Debug/net8.0/BookProject.API.pdb
 /Users/sebimcfarland/Desktop/Mission11_McFarland__RealVersion/backend/BookProject.APIE/obj/Debug/net8.0/BookProject.API.genruntimeconfig.cache
 /Users/sebimcfarland/Desktop/Mission11_McFarland__RealVersion/backend/BookProject.APIE/obj/Debug/net8.0/ref/BookProject.API.dll
+/Users/sebimcfarland/Desktop/Mission11_McFarland__RealVersion/backend/BookProject.APIE/obj/Debug/net8.0/BookProject.API.sourcelink.json

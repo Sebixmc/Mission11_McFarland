@@ -16,10 +16,21 @@ namespace BookProject.API.Controllers
             _bookDbContext = context;
         }
 
-        public IEnumerable<Book> GetAllBooks()
+        public IActionResult GetAllBooks(int pageHowMany = 5,int pageNum = 1)
         {
-            var something = _bookDbContext.Books.ToList();
-            return something;
+            var something = _bookDbContext.Books.ToList()
+                .Skip((pageNum-1)*pageHowMany)
+                .Take(pageHowMany)
+                .ToList();
+
+            var totalNumBooks = _bookDbContext.Books.Count();
+
+            var someObject = new
+            {
+                Books = something,
+                TotalNumBooks = totalNumBooks
+            };
+            return Ok(someObject);
         }
     }
 }
