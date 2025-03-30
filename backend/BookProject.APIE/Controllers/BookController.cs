@@ -16,14 +16,23 @@ namespace BookProject.API.Controllers
             _bookDbContext = context;
         }
 
-        public IActionResult GetAllBooks(int pageHowMany = 5,int pageNum = 1)
+        [HttpGet]
+        public IActionResult GetAllBooks(int pageHowMany = 5,int pageNum = 1, [FromQuery] List<string>? category = null)
         {
-            var something = _bookDbContext.Books.ToList()
+            IQueryable<Book> query = _bookDbContext.Books.AsQueryable();
+            if (category != null && category.Any())
+            {
+                query = query.Where(c => category.Contains(c.Category));
+            }
+            
+            var totalNumBooks = query.Count();
+            
+            var something = query
                 .Skip((pageNum-1)*pageHowMany)
                 .Take(pageHowMany)
                 .ToList();
 
-            var totalNumBooks = _bookDbContext.Books.Count();
+            
 
             var someObject = new
             {
@@ -32,5 +41,18 @@ namespace BookProject.API.Controllers
             };
             return Ok(someObject);
         }
+        
+        
+        [HttpGet("GetBookCategories")]
+        public IActionResult GetBookCategories()
+        {
+            var bookCategories = _bookDbContext.Books
+                .Select(b => b.Category)
+                .Distinct()
+                .ToList();
+            
+            return Ok(bookCategories);
+        }
+        
     }
 }
